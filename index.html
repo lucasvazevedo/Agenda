@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda de Tarefas - Crianças com Autismo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Agenda de Tarefas</h1>
+        <h2>Organize as atividades da semana</h2>
+    </header>
+    
+    <main>
+        <!-- Biblioteca de Cards -->
+        <section id="library">
+            <h3>Biblioteca de Atividades</h3>
+            <div class="card" draggable="true" data-type="comida">
+                <img src="imagens/prato-comida.jpg" alt="Comida">
+                <p>Hora de Comer</p>
+            </div>
+            <div class="card" draggable="true" data-type="atividade">
+                <img src="imagens/bola.jpg" alt="Atividade">
+                <p>Atividade Física</p>
+            </div>
+            <!-- Outros cards podem ser adicionados aqui -->
+        </section>
+
+        <!-- Agenda -->
+        <section id="agenda">
+            <h3>Agenda Semanal</h3>
+            <div class="week">
+                <div class="day" data-day="segunda-feira">
+                    <h4>Segunda-feira</h4>
+                    <div class="hours">
+                        <!-- Horas do dia, de 6h às 22h -->
+                        <div class="hour" data-hour="6">6h</div>
+                        <div class="hour" data-hour="7">7h</div>
+                        <!-- Mais horas -->
+                    </div>
+                </div>
+                <!-- Repetir para os outros dias -->
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
