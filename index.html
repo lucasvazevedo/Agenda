@@ -13,9 +13,22 @@
     </header>
     
     <main>
+
+        <div class="post-section">
+            <h3>Registrar Alimento</h3>
+            <input type="text" placeholder="Título do Post" class="post-title">
+            <textarea placeholder="Descrição do que comeu..." class="post-description" rows="4"></textarea>
+            <input type="file" accept="image/*" class="post-image" id="imageInput">
+            <button class="post-button">Postar</button>
+        </div>
+
         <!-- Biblioteca de Cards -->
         <section id="library">
             <h3>Biblioteca de Atividades</h3>
+            <section id="registered-foods">
+                <h3>Alimentos Registrados</h3>
+                <div id="food-list"></div>
+            </section>
             <div class="card" draggable="true" data-type="comida">
                 <img src="imagens/prato-comida.jpg" alt="Comida">
                 <p>Hora de Comer</p>
@@ -150,5 +163,15 @@
     </main>
 
     <script src="script.js"></script>
+
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3>Editar Alimento</h3>
+            <input type="text" placeholder="Título do Post" class="modal-post-title">
+            <textarea placeholder="Descrição do que comeu..." class="modal-post-description" rows="4"></textarea>
+            <button class="modal-post-button">Salvar</button>
+        </div>
+    </div>
 </body>
 </html>
