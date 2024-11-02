@@ -6,20 +6,31 @@
     <title>Agenda de Tarefas - Crianças com Autismo</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
 </head>
 <body>
-    <header>
-        <h1>Agenda de Tarefas</h1>
-        <h2>Organize as atividades da semana</h2>
-        <button id="show-form">Adicionar Modificações</button>
-        <button id="show-chart">Exibir Gráfico</button>
-    </header>
-    
-    
+  <header>
+    <div class="header-content">
+        <div class="title">
+            <h1>Agenda de Tarefas</h1>
+            <p>Organize as atividades da semana</p>
+        </div>
+        <div class="buttons">
+            <button id="show-form">Adicionar Modificações</button>
+            <button id="show-chart">Exibir Gráfico</button>
+        </div>
+    </div>
+</header>
+
+
+
+
+
     <main class="container">
         <div class="form">
             <h3>Registrar Alimento</h3>
-            <input type="text" placeholder="Título do Post" class="post-title">
+            <input type="text" placeholder="Nome do Alimento" class="post-title">
             <textarea placeholder="Descrição do que comeu..." class="post-description" rows="4"></textarea>
             <input type="file" accept="image/*" class="post-image" id="imageInput">
             <select class="post-type" id="foodType">
@@ -56,125 +67,45 @@
     
 
         <!-- Agenda -->
-        <section id="agenda">
-            <h3>Agenda Semanal </h3>
-            <div class="week">
-                <div class="day" data-day="segunda-feira">
-                    <h4>Segunda-feira</h4>
-                    <div class="hours">
-                        <div class="hour" data-hour="6">6h</div>
-                        <div class="hour" data-hour="7">7h</div>
-                        <div class="hour" data-hour="6">8h</div>
-                        <div class="hour" data-hour="7">9h</div>
-                        <div class="hour" data-hour="6">10h</div>
-                        <div class="hour" data-hour="7">11h</div>
-                        <div class="hour" data-hour="6">12h</div>
-                        <div class="hour" data-hour="7">13h</div>
-                        <div class="hour" data-hour="6">14h</div>
-                        <div class="hour" data-hour="7">15h</div>
-                        <div class="hour" data-hour="6">16h</div>
-                        <div class="hour" data-hour="7">17h</div>
-                        <div class="hour" data-hour="6">18h</div>
-                        <div class="hour" data-hour="7">19h</div>
-                        <div class="hour" data-hour="6">20h</div>
-                        <div class="hour" data-hour="7">21h</div>
-                        <div class="hour" data-hour="6">22h</div>
-                    </div>
-                </div>
-
-                <div class="day" data-day="terça-feira">
-                    <h4>Terça-feira</h4>
-                    <div class="hours">
-                        <div class="hour" data-hour="6">6h</div>
-                        <div class="hour" data-hour="7">7h</div>
-                        <div class="hour" data-hour="6">8h</div>
-                        <div class="hour" data-hour="7">9h</div>
-                        <div class="hour" data-hour="6">10h</div>
-                        <div class="hour" data-hour="7">11h</div>
-                        <div class="hour" data-hour="6">12h</div>
-                        <div class="hour" data-hour="7">13h</div>
-                        <div class="hour" data-hour="6">14h</div>
-                        <div class="hour" data-hour="7">15h</div>
-                        <div class="hour" data-hour="6">16h</div>
-                        <div class="hour" data-hour="7">17h</div>
-                        <div class="hour" data-hour="6">18h</div>
-                        <div class="hour" data-hour="7">19h</div>
-                        <div class="hour" data-hour="6">20h</div>
-                        <div class="hour" data-hour="7">21h</div>
-                        <div class="hour" data-hour="6">22h</div>
-                    </div>
-                </div>
-
-                <div class="day" data-day="quarta-feira">
-                    <h4>Quarta-feira</h4>
-                    <div class="hours">
-                        <div class="hour" data-hour="6">6h</div>
-                        <div class="hour" data-hour="7">7h</div>
-                        <div class="hour" data-hour="6">8h</div>
-                        <div class="hour" data-hour="7">9h</div>
-                        <div class="hour" data-hour="6">10h</div>
-                        <div class="hour" data-hour="7">11h</div>
-                        <div class="hour" data-hour="6">12h</div>
-                        <div class="hour" data-hour="7">13h</div>
-                        <div class="hour" data-hour="6">14h</div>
-                        <div class="hour" data-hour="7">15h</div>
-                        <div class="hour" data-hour="6">16h</div>
-                        <div class="hour" data-hour="7">17h</div>
-                        <div class="hour" data-hour="6">18h</div>
-                        <div class="hour" data-hour="7">19h</div>
-                        <div class="hour" data-hour="6">20h</div>
-                        <div class="hour" data-hour="7">21h</div>
-                        <div class="hour" data-hour="6">22h</div>
-                    </div>
-                </div>
-                
-                <div class="day" data-day="quinta-feira">
-                    <h4>Quinta-feira</h4>
-                    <div class="hours">
-                        <div class="hour" data-hour="6">6h</div>
-                        <div class="hour" data-hour="7">7h</div>
-                        <div class="hour" data-hour="6">8h</div>
-                        <div class="hour" data-hour="7">9h</div>
-                        <div class="hour" data-hour="6">10h</div>
-                        <div class="hour" data-hour="7">11h</div>
-                        <div class="hour" data-hour="6">12h</div>
-                        <div class="hour" data-hour="7">13h</div>
-                        <div class="hour" data-hour="6">14h</div>
-                        <div class="hour" data-hour="7">15h</div>
-                        <div class="hour" data-hour="6">16h</div>
-                        <div class="hour" data-hour="7">17h</div>
-                        <div class="hour" data-hour="6">18h</div>
-                        <div class="hour" data-hour="7">19h</div>
-                        <div class="hour" data-hour="6">20h</div>
-                        <div class="hour" data-hour="7">21h</div>
-                        <div class="hour" data-hour="6">22h</div>
-                    </div>
-                </div>
-
-                <div class="day" data-day="sexta-feira">
-                    <h4>Sexta-feira</h4>
-                    <div class="hours">
-                        <div class="hour" data-hour="6">6h</div>
-                        <div class="hour" data-hour="7">7h</div>
-                        <div class="hour" data-hour="6">8h</div>
-                        <div class="hour" data-hour="7">9h</div>
-                        <div class="hour" data-hour="6">10h</div>
-                        <div class="hour" data-hour="7">11h</div>
-                        <div class="hour" data-hour="6">12h</div>
-                        <div class="hour" data-hour="7">13h</div>
-                        <div class="hour" data-hour="6">14h</div>
-                        <div class="hour" data-hour="7">15h</div>
-                        <div class="hour" data-hour="6">16h</div>
-                        <div class="hour" data-hour="7">17h</div>
-                        <div class="hour" data-hour="6">18h</div>
-                        <div class="hour" data-hour="7">19h</div>
-                        <div class="hour" data-hour="6">20h</div>
-                        <div class="hour" data-hour="7">21h</div>
-                        <div class="hour" data-hour="6">22h</div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <div class="calendar">
+          <header>
+              <button class="secondary">Today</button>
+              <div class="calendar__title">
+                  <div class="icon secondary chevron_left">‹</div>
+                  <h1><strong>18 JAN – 24 JAN</strong></h1>
+                  <div class="icon secondary chevron_left">›</div>
+              </div> 
+              <div></div>
+          </header>
+          <div class="outer">
+              <div class="wrap"> 
+                  <table>
+                      <thead>
+                          <tr>
+                              <th class="headcol">Time</th>
+                              <th>Wednesday, 20</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr><td class="headcol">6:00</td><td class="dropzone"></td></tr>
+                          <tr><td class="headcol">7:00</td><td class="dropzone"></td></tr>
+                          <tr><td class="headcol">8:00</td><td class="dropzone"></td></tr>
+                          <tr><td class="headcol">10:00</td><td class="dropzone"></td></tr>
+                          <tr><td class="headcol">11:00</td><td class="dropzone"></td></tr>
+                          <tr><td class="headcol">12:00</td><td class="dropzone"></td></tr>
+                          <tr><td class="headcol">13:00</td><td class="dropzone"></td></tr>
+                          <tr><td class="headcol">14:00</td><td class="dropzone"></td></tr>
+                          <tr><td class="headcol">15:00</td><td class="dropzone"></td></tr>
+                          <tr><td class="headcol">16:00</td><td class="dropzone"></td></tr>
+                          <tr><td class="headcol">17:00</td><td class="dropzone"></td></tr>
+                          <tr><td class="headcol">18:00</td><td class="dropzone"></td></tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
+      
+        
     </main>
 
     <script src="script.js"></script>

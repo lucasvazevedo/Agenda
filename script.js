@@ -15,24 +15,30 @@ document.addEventListener("DOMContentLoaded", () => {
     let editingIndex = null;
 
     postButton.addEventListener("click", registerFood);
-    loadFoods();
-
     saveChangesButton.addEventListener("click", saveChanges);
     closeButton.addEventListener("click", closeModal);
+    
+    loadFoods();
 
     function registerFood() {
         const title = foodTitle.value.trim();
         const description = foodDescription.value.trim();
         const type = foodType.value;
-        const imageUrl = imageInput.files.length > 0 ? URL.createObjectURL(imageInput.files[0]) : '';
 
-        if (title && description && type) {
-            const food = { title, description, type, imageUrl };
-            addFoodToStorage(food);
-            loadFoods();
-            clearInputs();
+        if (imageInput.files.length > 0) {
+            const file = imageInput.files[0];
+            const reader = new FileReader();
+
+            reader.onloadend = () => {
+                const food = { title, description, type, imageUrl: reader.result };
+                addFoodToStorage(food);
+                loadFoods();
+                clearInputs();
+            };
+
+            reader.readAsDataURL(file);
         } else {
-            alert("Por favor, preencha todos os campos.");
+            alert("Por favor, selecione uma imagem.");
         }
     }
 
@@ -48,21 +54,23 @@ document.addEventListener("DOMContentLoaded", () => {
         foods.forEach((food, index) => {
             const foodItem = document.createElement("div");
             foodItem.className = "card";
-            foodItem.draggable = true;
-            foodItem.dataset.type = "comida";
+            foodItem.setAttribute("draggable", "true");
+            foodItem.setAttribute("data-index", index);
 
             foodItem.innerHTML = `
                 <img src="${food.imageUrl}" alt="${food.title}" style="width:100px;height:auto;">
                 <p>${food.title}</p>
                 <p>${food.description}</p>
                 <p>Tipo: ${food.type}</p>
-                <button onclick="editFood(${index})">Editar</button>
-                <button onclick="deleteFood(${index})">Excluir</button>
+                <button onclick="editFood(${index})"  class="btn-edit">Editar</button>
+                <button onclick="deleteFood(${index})"  class="btn-delete">Excluir</button>
             `;
 
             foodItem.addEventListener("dragstart", dragStart);
+            foodItem.addEventListener("dragend", dragEnd);
             foodList.appendChild(foodItem);
         });
+        addDropzones();
     }
 
     function getFoodsFromStorage() {
@@ -72,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function clearInputs() {
         foodTitle.value = '';
         foodDescription.value = '';
-        foodType.value = ''; // Limpa o tipo selecionado
+        foodType.value = '';
         imageInput.value = '';
     }
 
@@ -84,33 +92,39 @@ document.addEventListener("DOMContentLoaded", () => {
         editFoodDescription.value = food.description;
         editFoodType.value = food.type;
         editImageInput.value = '';
-        editModal.style.display = "block"; // Mostra o modal
-    };
-    
-    function closeModal() {
-        editModal.style.display = "none"; // Esconde o modal
+        editModal.style.display = "block";
     }
-    
-    function saveChanges() {
-        const title = editFoodTitle.value.trim();
-        const description = editFoodDescription.value.trim();
-        const type = editFoodType.value;
-        const imageUrl = editImageInput.files.length > 0 ? URL.createObjectURL(editImageInput.files[0]) : '';
 
-        if (title && description && type) {
-            const food = { title, description, type, imageUrl }; // Inclui o tipo
-            const foods = getFoodsFromStorage();
-            foods[editingIndex] = food; 
+    function saveChanges() {
+        const foods = getFoodsFromStorage();
+        const food = foods[editingIndex];
+
+        food.title = editFoodTitle.value.trim();
+        food.description = editFoodDescription.value.trim();
+        food.type = editFoodType.value;
+
+        if (editImageInput.files.length > 0) {
+            const file = editImageInput.files[0];
+            const reader = new FileReader();
+
+            reader.onloadend = () => {
+                food.imageUrl = reader.result;
+                localStorage.setItem("foods", JSON.stringify(foods));
+                loadFoods();
+                closeModal();
+            };
+
+            reader.readAsDataURL(file);
+        } else {
             localStorage.setItem("foods", JSON.stringify(foods));
             loadFoods();
             closeModal();
-        } else {
-            alert("Por favor, preencha todos os campos.");
         }
     }
 
     function closeModal() {
-        editModal.style.display = "none"; 
+        editModal.style.display = "none";
+        editingIndex = null;
     }
 
     window.deleteFood = function(index) {
@@ -118,29 +132,45 @@ document.addEventListener("DOMContentLoaded", () => {
         foods.splice(index, 1);
         localStorage.setItem("foods", JSON.stringify(foods));
         loadFoods();
-    };
-
-    function dragStart(e) {
-        e.dataTransfer.setData("text/plain", e.target.innerHTML);
     }
 
-    const hours = document.querySelectorAll(".hour");
-    hours.forEach(hour => {
-        hour.addEventListener("dragover", dragOver);
-        hour.addEventListener("drop", drop);
-    });
-
-    function dragOver(e) {
-        e.preventDefault();
+    function dragStart(event) {
+        event.dataTransfer.setData("text/plain", event.target.getAttribute("data-index"));
+        setTimeout(() => {
+            event.target.style.display = "none";
+        }, 0);
     }
 
-    function drop(e) {
-        e.preventDefault();
-        const cardHTML = e.dataTransfer.getData("text/plain");
-        e.target.innerHTML += cardHTML;
+    function dragEnd(event) {
+        event.target.style.display = "block";
+    }
+
+    function addDropzones() {
+        const dropzones = document.querySelectorAll(".dropzone");
+        dropzones.forEach(dropzone => {
+            dropzone.addEventListener("dragover", dragOver);
+            dropzone.addEventListener("drop", drop);
+        });
+    }
+
+    function dragOver(event) {
+        event.preventDefault();
+    }
+
+    function drop(event) {
+        const index = event.dataTransfer.getData("text/plain");
+        const foods = getFoodsFromStorage();
+        const food = foods[index];
+        const dropzone = event.target;
+
+        const foodEvent = document.createElement("div");
+        foodEvent.className = "event";
+        foodEvent.innerHTML = `<p>${food.title}</p><img src="${food.imageUrl}" alt="${food.title}" style="width:30px;height:auto;">`;
+        dropzone.appendChild(foodEvent);
+
+        deleteFood(index);
     }
 });
-
 document.getElementById('show-chart').addEventListener('click', function() {
     window.location.href = './pages/chart.html'; 
 });

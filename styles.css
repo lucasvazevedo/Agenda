@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', 'Inter', sans-serif;
     background-color: #f5f5f5;
     margin: 0;
     padding: 0;
@@ -9,9 +9,36 @@ header {
     background-color: #4CAF50;
     color: white;
     padding: 20px;
-    text-align: center;
-    animation: slideIn 1s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title h1, .title h2 {
+    margin: 0;
+}
+
+.buttons button {
+    background-color: white;
+    color: #4CAF50;
+    padding: 10px 15px;
+    font-family: 'Poppins', 'Inter', sans-serif;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.buttons button:hover {
+    background-color: #347b37;
+    color: white;
+}
+
 
 h1, h2, h3 {
     margin: 0;
@@ -19,141 +46,102 @@ h1, h2, h3 {
 }
 
 
-.card {
-    width: 100px;
-    text-align: center;
-    margin-bottom: 10px;
-    cursor: pointer;
-    border: 1px solid #ddd;
-    padding: 10px;
-    border-radius: 5px;
-    background-color: #fff;
-}
-
-.card img {
-    width: 80px;
-    height: 80px;
-}
-
-#agenda {
-    margin: 20px;
-    padding: 20px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-.week {
-    display: flex;
-    justify-content: space-between;
-}
-
-.day {
-    width: 100%;
-    padding: 10px;
-    border-right: 1px solid #ddd;
-}
-
-.hours {
-    display: grid;
-    grid-template-rows: repeat(16, 1fr);
-}
-
-.hour {
-    border: 1px solid #ddd;
-    padding: 20px;
-    text-align: center;
-    background-color: #f0f0f0;
-}
-
+/*****************************FORM E BIBLIOTECA DE ATIVIDADES**********************************************************************/
 .container {
     display: flex;
     justify-content: space-between;
-    align-items: stretch;
+    gap: 20px;
     padding: 20px;
-}
-
-
-.form, #library {
-    width: 48%;
-    background: #FFFFFF;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-    border-radius: 8px;
-    padding: 20px;
-    margin: 10px;
-    height: 400px; /* Altura fixa para ambos */
-    overflow-y: auto; /* Permite rolagem se o conteúdo exceder a altura */
-}
-
-#registered-foods {
-    max-height: 300px; /* Altura máxima para a lista de alimentos registrados */
-    overflow-y: auto; /* Permite rolagem apenas nesta seção, se necessário */
-}
-
-.preview-image {
-    display: block;
-    margin: 10px auto;
-    max-width: 100%;
-    max-height: 150px;
-    height: auto;
-    border-radius: 8px;
-    border: 2px solid #4CAF50;
+    margin-top: 30px;
 }
 
 .form {
-    width: 100%;
-    max-width: 360px;
-    margin-top: 20px !important;
-    padding: 45px;
-    margin: auto;
-    background: #FFFFFF;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-    text-align: center;
-    border-radius: 8px;
-}
-
-.form h3 {
-    margin: 0 0 20px;
-    color: #333;
-    font-weight: 400;
-}
-
-.form input, .form textarea {
-    font-family: 'Roboto', sans-serif;
-    outline: 0;
-    background: #f2f2f2;
-    width: 100%;
-    border: 0;
-    margin: 0 0 15px;
-    padding: 15px;
-    font-size: 14px;
-    border-radius: 4px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 48%;
+    height: 400px;
     box-sizing: border-box;
+    border-radius: 12px;
 }
 
-.form textarea {
-    resize: none;
-    height: 80px;
+#library {
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 48%;
+    height: 400px;
+    box-sizing: border-box;
+    border-radius: 12px;
+    overflow-y: auto;
 }
 
-.form button {
-    font-family: 'Roboto', sans-serif;
-    outline: 0;
-    background: #4CAF50;
+.form h3, #library h3 {
+    margin-top: 0;
+    color: #333;
+    font-weight: 600;
+}
+
+.post-title, .post-description, .post-type {
     width: 100%;
-    border: 0;
-    padding: 15px;
-    color: #FFFFFF;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
     font-size: 14px;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: background 0.3s ease;
-    border-radius: 4px;
+    transition: border-color 0.3s ease;
 }
 
-.form button:hover {
-    background: #43A047;
+.post-title:focus, .post-description:focus, .post-type:focus {
+    border-color: #4CAF50;
+    outline: none;
+    box-shadow: 0 0 6px rgba(76, 175, 80, 0.2);
 }
+
+.post-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    width: 100%;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.post-button:hover {
+    background-color: #45a049;
+}
+
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 10px;
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: scale(1.02);
+}
+
+#library::-webkit-scrollbar {
+    width: 6px;
+}
+
+#library::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#library::-webkit-scrollbar-thumb {
+    background-color: #4CAF50;
+    border-radius: 10px;
+}
+
+/***********************************MODAL**********************************/
 
 .modal {
     display: none;
@@ -233,4 +221,109 @@ h1, h2, h3 {
 
 .modal button:hover {
     background: #43A047;
+}
+
+
+/*************************AGENDA***************/
+
+  
+.calendar {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+  }
+  
+
+
+  .today-button {
+    background: transparent;
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+  }
+  
+  .today-button:hover {
+    background: rgba(255, 255, 255, 0.3);
+    color: #00B4FC;
+  }
+  
+
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  thead {
+    background: #f4f4f4;
+  }
+  
+  th, td {
+    padding: 1rem;
+    text-align: center;
+    border: 1px solid #ddd;
+    transition: background 0.2s;
+  }
+  
+  .headcol {
+    width: 60px;
+    background: #f0f4f8;
+  }
+  
+  td:hover {
+    background: #f9f9f9;
+  }
+  
+  .event {
+    background: #00B4FC;
+    color: white;
+    border-radius: 4px;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .event:hover {
+    background: #0091c9;
+  }
+  
+  .icon {
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: white;
+    transition: color 0.3s;
+  }
+  
+  .icon:hover {
+    color: #f0f4f8;
+  }
+
+  .btn-edit {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.btn-delete {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
 }
