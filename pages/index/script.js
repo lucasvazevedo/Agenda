@@ -172,5 +172,5 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 document.getElementById('show-chart').addEventListener('click', function() {
-    window.location.href = './pages/chart.html'; 
+    window.location.href = '../chart/chart.html'; 
 });
