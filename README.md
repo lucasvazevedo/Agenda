@@ -7,7 +7,7 @@ Este projeto é de uma agenda interativa que permite criar a rotina semanal etra
 É necessário criar o card para a determinada ação existir
 
 - Por hora apenas cards pré setados são exibidos
-- É necessária a criação de um campo de edição e criação de cards <strong>(Camila)</strong>
+- É necessária a criação de um campo de edição e criação de cards <strong>(Camila)</strong> ✅
 - Quando se tratar de card de comida, exibir uma lista de alimentos e cada alimento terá um checkbox para que seja marcado (a finalidade do checkbos é para sinalizar qual alimento a criança come)
 
 ## Agenda
