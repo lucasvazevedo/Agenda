@@ -84,11 +84,14 @@ h1, h2, h3 {
 
 .post-title, .post-description, .post-type {
     width: 100%;
-    padding: 10px;
     margin-bottom: 15px;
+    padding: 4px;
+    resize: none;
     border: 1px solid #ddd;
     border-radius: 8px;
+    background-color: #f7f7f7; 
     font-size: 14px;
+    font-family: 'Poppins', sans-serif;
     transition: border-color 0.3s ease;
 }
 
@@ -117,11 +120,27 @@ h1, h2, h3 {
 
 .card {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 10px;
+    padding: 5px; 
     border-radius: 8px;
     margin-top: 10px;
     text-align: center;
     transition: transform 0.2s ease;
+    width: 150px; 
+    height: auto; 
+    font-size: 12px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.card img {
+    width: 80px;
+    height: auto;
+    
+}
+
+.btn-edit, .btn-delete {
+    padding: 5px 8px; 
+    font-size: 10px;
+    margin: 2px; 
 }
 
 .card:hover {
@@ -232,8 +251,22 @@ h1, h2, h3 {
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     width: 100%;
+    margin-top: 30px;
   }
   
+  .calendar header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+
+
+.calendar__title {
+    display: flex;
+    align-items: center;
+}
 
 
   .today-button {
@@ -279,27 +312,30 @@ h1, h2, h3 {
   }
   
   .event {
-    background: #00B4FC;
+    background: #ff5733; /* Mudar a cor do evento */
     color: white;
-    border-radius: 4px;
-    padding: 0.5rem;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-  
-  .event:hover {
-    background: #0091c9;
-  }
+    border-radius: 8px; /* Para um visual mais "card" */
+    padding: 10px;
+    margin: 5px; /* Adiciona espaço entre os cards de eventos */
+    width: auto; /* Permitir que o card não ocupe toda a largura */
+    display: inline-block; /* Faz o card se comportar como um bloco em linha */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra para efeito de card */
+}
+
+.event:hover {
+    background: #c0392b; /* Cor de fundo do evento ao passar o mouse */
+}
   
   .icon {
     cursor: pointer;
     font-size: 1.5rem;
     color: white;
+    margin: 0 10px;
     transition: color 0.3s;
   }
   
   .icon:hover {
-    color: #f0f4f8;
+    color: #dadde0;
   }
 
   .btn-edit {
@@ -326,4 +362,36 @@ h1, h2, h3 {
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 4px;
+}
+
+
+
+
+
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; 
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; 
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
 }

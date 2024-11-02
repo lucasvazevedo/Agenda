@@ -5,27 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agenda de Tarefas - Crianças com Autismo</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../../assets/favicon.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
 </head>
 <body>
-  <header>
-    <div class="header-content">
-        <div class="title">
-            <h1>Agenda de Tarefas</h1>
-            <p>Organize as atividades da semana</p>
+    <header>
+        <div class="header-content">
+            <div class="title">
+                <h1>Agenda de Tarefas</h1>
+                <p>Organize as atividades da semana</p>
+            </div>
+            <div class="buttons">
+                <button id="show-form">Adicionar Modificações</button>
+                <button id="show-chart">Exibir Gráfico</button>
+            </div>
         </div>
-        <div class="buttons">
-            <button id="show-form">Adicionar Modificações</button>
-            <button id="show-chart">Exibir Gráfico</button>
-        </div>
-    </div>
-</header>
-
-
-
-
+    </header>
 
     <main class="container">
         <div class="form">
@@ -42,73 +38,117 @@
             </select>
             <button class="post-button">Postar</button>
         </div>
-        
 
-    
-      
-<section id="library">
-    <h3>Biblioteca de Atividades</h3>
-    <section id="registered-foods">
-        <h3>Alimentos Registrados</h3>
-        <div id="food-list"></div>
-    </section>
-    <div class="card" draggable="true" data-type="comida">
-        <img src="imagens/prato-comida.jpg" alt="Comida">
-        <p>Hora de Comer</p>
-    </div>
-    <div class="card" draggable="true" data-type="atividade">
-        <img src="imagens/bola.jpg" alt="Atividade">
-        <p>Atividade Física</p>
-    </div>
-    <!-- Outros cards podem ser adicionados aqui -->
-</section>
+        <section id="library">
+            <h3>Biblioteca de Atividades</h3>
+            <p>Arraste o alimento na agenda ou selecione para enviar o alimento desejado:</p>
+            <div id="registered-foods">
+                <h3>Alimentos Registrados</h3>
+                <div id="food-list" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
+                <button id="show-example-foods-modal">Alimentos já registrados</button>
+            </div>
+            <button id="send-to-calendar">Enviar para o Calendário</button>
+
+            <div>
+                <label for="day-select">Escolha um dia:</label>
+                <select id="day-select">
+                    <option value="domingo">Domingo</option>
+                    <option value="segunda">Segunda</option>
+                    <option value="terca">Terça</option>
+                    <option value="quarta">Quarta</option>
+                    <option value="quinta">Quinta</option>
+                    <option value="sexta">Sexta</option>
+                    <option value="sabado">Sábado</option>
+                </select>
+                <label for="time-select">Escolha um horário:</label>
+                <select id="time-select">
+                    <option value="06:00">06:00</option>
+                    <option value="07:00">07:00</option>
+                    <option value="08:00">08:00</option>
+                    <option value="09:00">09:00</option>
+                    <option value="10:00">10:00</option>
+                    <option value="11:00">11:00</option>
+                    <option value="12:00">12:00</option>
+                    <option value="13:00">13:00</option>
+                    <option value="14:00">14:00</option>
+                    <option value="15:00">15:00</option>
+                    <option value="16:00">16:00</option>
+                    <option value="17:00">17:00</option>
+                    <option value="18:00">18:00</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- Modal for Example Foods -->
+        <div id="exampleFoodsModal" class="modal" style="display:none;">
+            <div class="modal-content">
+                <h3>Exemplo de Alimentos</h3>
+                <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+                    <div class="food-card" style="border: 1px solid #ccc; border-radius: 10px; padding: 10px; text-align: center; width: 150px;">
+                        <img src="https://via.placeholder.com/100" alt="Exemplo de Alimento 1" style="width: 100px; height: 100px; border-radius: 5px;">
+                        <p>Maçã</p>
+                        <p>Uma fruta saudável.</p>
+                        <input type="checkbox" class="send-checkbox" data-day="domingo" data-time="06:00"> Enviar
+                    </div>
+                    <div class="food-card" style="border: 1px solid #ccc; border-radius: 10px; padding: 10px; text-align: center; width: 150px;">
+                        <img src="https://via.placeholder.com/100" alt="Exemplo de Alimento 2" style="width: 100px; height: 100px; border-radius: 5px;">
+                        <p>Brócolis</p>
+                        <p>Vegetal nutritivo.</p>
+                        <input type="checkbox" class="send-checkbox" data-day="segunda" data-time="07:00"> Enviar
+                    </div>
+                    <div class="food-card" style="border: 1px solid #ccc; border-radius: 10px; padding: 10px; text-align: center; width: 150px;">
+                        <img src="https://via.placeholder.com/100" alt="Exemplo de Alimento 3" style="width: 100px; height: 100px; border-radius: 5px;">
+                        <p>Frango Grelhado</p>
+                        <p>Fonte de proteína.</p>
+                        <input type="checkbox" class="send-checkbox" data-day="terca" data-time="08:00"> Enviar
+                    </div>
+                </div>
+                <button class="close-button">Fechar</button>
+            </div>
+        </div>
 
     </main>
-    
 
-        <!-- Agenda -->
-        <div class="calendar">
-          <header>
-              <button class="secondary">Today</button>
-              <div class="calendar__title">
-                  <div class="icon secondary chevron_left">‹</div>
-                  <h1><strong>18 JAN – 24 JAN</strong></h1>
-                  <div class="icon secondary chevron_left">›</div>
-              </div> 
-              <div></div>
-          </header>
-          <div class="outer">
-              <div class="wrap"> 
-                  <table>
-                      <thead>
-                          <tr>
-                              <th class="headcol">Time</th>
-                              <th>Wednesday, 20</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                          <tr><td class="headcol">6:00</td><td class="dropzone"></td></tr>
-                          <tr><td class="headcol">7:00</td><td class="dropzone"></td></tr>
-                          <tr><td class="headcol">8:00</td><td class="dropzone"></td></tr>
-                          <tr><td class="headcol">10:00</td><td class="dropzone"></td></tr>
-                          <tr><td class="headcol">11:00</td><td class="dropzone"></td></tr>
-                          <tr><td class="headcol">12:00</td><td class="dropzone"></td></tr>
-                          <tr><td class="headcol">13:00</td><td class="dropzone"></td></tr>
-                          <tr><td class="headcol">14:00</td><td class="dropzone"></td></tr>
-                          <tr><td class="headcol">15:00</td><td class="dropzone"></td></tr>
-                          <tr><td class="headcol">16:00</td><td class="dropzone"></td></tr>
-                          <tr><td class="headcol">17:00</td><td class="dropzone"></td></tr>
-                          <tr><td class="headcol">18:00</td><td class="dropzone"></td></tr>
-                      </tbody>
-                  </table>
-              </div>
-          </div>
-      </div>
-      
-        
-    </main>
+    <div class="calendar">
+        <header>
+            <button class="secondary" id="today-button">Hoje</button>
+            <div class="calendar__title">
+                <div class="icon secondary chevron_left" id="prev-day">‹</div>
+                <h1 id="calendar-title"><strong>Hoje</strong></h1>
+                <div class="icon secondary chevron_left" id="next-day">›</div>
+            </div>
+            <div></div>
+        </header>
+        <div class="outer">
+            <div class="wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="headcol">Hora</th>
+                            <th>Dia da Semana</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td class="headcol">6:00</td><td class="dropzone" data-time="06:00"></td></tr>
+                        <tr><td class="headcol">7:00</td><td class="dropzone" data-time="07:00"></td></tr>
+                        <tr><td class="headcol">8:00</td><td class="dropzone" data-time="08:00"></td></tr>
+                        <tr><td class="headcol">9:00</td><td class="dropzone" data-time="09:00"></td></tr>
+                        <tr><td class="headcol">10:00</td><td class="dropzone" data-time="10:00"></td></tr>
+                        <tr><td class="headcol">11:00</td><td class="dropzone" data-time="11:00"></td></tr>
+                        <tr><td class="headcol">12:00</td><td class="dropzone" data-time="12:00"></td></tr>
+                        <tr><td class="headcol">13:00</td><td class="dropzone" data-time="13:00"></td></tr>
+                        <tr><td class="headcol">14:00</td><td class="dropzone" data-time="14:00"></td></tr>
+                        <tr><td class="headcol">15:00</td><td class="dropzone" data-time="15:00"></td></tr>
+                        <tr><td class="headcol">16:00</td><td class="dropzone" data-time="16:00"></td></tr>
+                        <tr><td class="headcol">17:00</td><td class="dropzone" data-time="17:00"></td></tr>
+                        <tr><td class="headcol">18:00</td><td class="dropzone" data-time="18:00"></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
-    <script src="script.js"></script>
+    <script src="./script.js"></script>
 
     <div id="editModal" class="modal" style="display:none;">
         <div class="modal-content">
@@ -127,6 +167,8 @@
             <button class="close-button">Fechar</button>
         </div>
     </div>
-    
+
 </body>
+
+
 </html>

@@ -62,8 +62,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 <p>${food.title}</p>
                 <p>${food.description}</p>
                 <p>Tipo: ${food.type}</p>
-                <button onclick="editFood(${index})"  class="btn-edit">Editar</button>
-                <button onclick="deleteFood(${index})"  class="btn-delete">Excluir</button>
+                <button onclick="editFood(${index})" class="btn-edit">Editar</button>
+                <button onclick="deleteFood(${index})" class="btn-delete">Excluir</button>
             `;
 
             foodItem.addEventListener("dragstart", dragStart);
@@ -171,6 +171,7 @@ document.addEventListener("DOMContentLoaded", () => {
         deleteFood(index);
     }
 });
+
 document.getElementById('show-chart').addEventListener('click', function() {
     window.location.href = '../chart/chart.html'; 
 });
