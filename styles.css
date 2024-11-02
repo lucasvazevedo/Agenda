@@ -10,6 +10,7 @@ header {
     color: white;
     padding: 20px;
     text-align: center;
+    animation: slideIn 1s ease-in-out;
 }
 
 h1, h2, h3 {
@@ -74,27 +75,19 @@ h1, h2, h3 {
 
 .container {
     display: flex;
+    justify-content: space-between;
+    align-items: stretch; /* Para que ambos os cards tenham a mesma altura */
     padding: 20px;
-    align-items: stretch;
 }
 
-.post-section {
-    width: calc(100% - 40px);
-    max-width: 600px;
-    margin: 20px auto;
-    background: white;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
 
-.post-title, .post-description {
-    width: 100%;
-    margin-bottom: 10px;
-    resize: none;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+.form, #library {
+    width: 48%; /* Ajuste a largura conforme necessário */
+    background: #FFFFFF;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px; /* Margem para espaçamento entre os cards */
 }
 
 .preview-image {
@@ -107,14 +100,59 @@ h1, h2, h3 {
     border: 2px solid #4CAF50;
 }
 
-.post-button {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
+.form {
     width: 100%;
+    max-width: 360px;
+    margin-top: 20px !important;
+    padding: 45px;
+    margin: auto;
+    background: #FFFFFF;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    text-align: center;
+    border-radius: 8px;
+}
+
+.form h3 {
+    margin: 0 0 20px;
+    color: #333;
+    font-weight: 400;
+}
+
+.form input, .form textarea {
+    font-family: 'Roboto', sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    font-size: 14px;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.form textarea {
+    resize: none;
+    height: 80px;
+}
+
+.form button {
+    font-family: 'Roboto', sans-serif;
+    outline: 0;
+    background: #4CAF50;
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    border-radius: 4px;
+}
+
+.form button:hover {
+    background: #43A047;
 }
 
 .modal {
@@ -130,12 +168,14 @@ h1, h2, h3 {
 }
 
 .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
+    background-color: #FFFFFF;
+    margin: 10% auto;
     padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 500px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
 }
 
 .close-button {
@@ -147,7 +187,50 @@ h1, h2, h3 {
 
 .close-button:hover,
 .close-button:focus {
-    color: black;
+    color: #4CAF50;
     text-decoration: none;
     cursor: pointer;
+}
+
+.modal h3 {
+    margin: 0 0 20px;
+    color: #333;
+    font-weight: 400;
+}
+
+.modal input, .modal textarea {
+    font-family: 'Roboto', sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    font-size: 14px;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.modal textarea {
+    resize: none;
+    height: 80px;
+}
+
+.modal button {
+    font-family: 'Roboto', sans-serif;
+    outline: 0;
+    background: #4CAF50;
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    border-radius: 4px;
+}
+
+.modal button:hover {
+    background: #43A047;
 }

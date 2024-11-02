@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agenda de Tarefas - Crianças com Autismo</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
 </head>
 <body>
     <header>
@@ -12,17 +13,15 @@
         <h2>Organize as atividades da semana</h2>
     </header>
     
-    <main>
-
-        <div class="post-section">
+    <main class="container">
+        <div class="form">
             <h3>Registrar Alimento</h3>
             <input type="text" placeholder="Título do Post" class="post-title">
             <textarea placeholder="Descrição do que comeu..." class="post-description" rows="4"></textarea>
             <input type="file" accept="image/*" class="post-image" id="imageInput">
             <button class="post-button">Postar</button>
         </div>
-
-        <!-- Biblioteca de Cards -->
+    
         <section id="library">
             <h3>Biblioteca de Atividades</h3>
             <section id="registered-foods">
@@ -39,6 +38,8 @@
             </div>
             <!-- Outros cards podem ser adicionados aqui -->
         </section>
+    </main>
+    
 
         <!-- Agenda -->
         <section id="agenda">
@@ -168,9 +169,10 @@
         <div class="modal-content">
             <span class="close-button">&times;</span>
             <h3>Editar Alimento</h3>
-            <input type="text" placeholder="Título do Post" class="modal-post-title">
-            <textarea placeholder="Descrição do que comeu..." class="modal-post-description" rows="4"></textarea>
-            <button class="modal-post-button">Salvar</button>
+            <input type="text" id="edit-food-title" placeholder="Título do Alimento" />
+            <textarea id="edit-food-description" placeholder="Descrição" rows="4"></textarea>
+            <input type="file" id="edit-image-input" accept="image/*" />
+            <button id="save-changes">Salvar Alterações</button>
         </div>
     </div>
 </body>

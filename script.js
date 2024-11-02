@@ -4,14 +4,23 @@ document.addEventListener("DOMContentLoaded", () => {
     const foodTitle = document.querySelector(".post-title");
     const foodDescription = document.querySelector(".post-description");
     const imageInput = document.getElementById("imageInput");
-    const hours = document.querySelectorAll(".hour");
+    const editModal = document.getElementById("editModal");
+    const editFoodTitle = document.getElementById("edit-food-title");
+    const editFoodDescription = document.getElementById("edit-food-description");
+    const editImageInput = document.getElementById("edit-image-input");
+    const saveChangesButton = document.getElementById("save-changes");
+    const closeButton = document.querySelector(".close-button");
+    let editingIndex = null;
 
     postButton.addEventListener("click", registerFood);
     loadFoods();
 
+    saveChangesButton.addEventListener("click", saveChanges);
+    closeButton.addEventListener("click", closeModal);
+
     function registerFood() {
-        const title = foodTitle.value;
-        const description = foodDescription.value;
+        const title = foodTitle.value.trim();
+        const description = foodDescription.value.trim();
         const imageUrl = imageInput.files.length > 0 ? URL.createObjectURL(imageInput.files[0]) : '';
 
         if (title && description) {
@@ -19,6 +28,8 @@ document.addEventListener("DOMContentLoaded", () => {
             addFoodToStorage(food);
             loadFoods();
             clearInputs();
+        } else {
+            alert("Por favor, preencha todos os campos.");
         }
     }
 
@@ -61,13 +72,35 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     window.editFood = function(index) {
+        editingIndex = index;
         const foods = getFoodsFromStorage();
         const food = foods[index];
-        foodTitle.value = food.title;
-        foodDescription.value = food.description;
-        imageInput.value = '';
-        deleteFood(index);
+        editFoodTitle.value = food.title;
+        editFoodDescription.value = food.description;
+        editImageInput.value = ''; // Reset the file input
+        editModal.style.display = "block"; // Show the modal
     };
+
+    function saveChanges() {
+        const title = editFoodTitle.value.trim();
+        const description = editFoodDescription.value.trim();
+        const imageUrl = editImageInput.files.length > 0 ? URL.createObjectURL(editImageInput.files[0]) : '';
+
+        if (title && description) {
+            const food = { title, description, imageUrl };
+            const foods = getFoodsFromStorage();
+            foods[editingIndex] = food; // Update the food item
+            localStorage.setItem("foods", JSON.stringify(foods));
+            loadFoods();
+            closeModal();
+        } else {
+            alert("Por favor, preencha todos os campos.");
+        }
+    }
+
+    function closeModal() {
+        editModal.style.display = "none"; // Hide the modal
+    }
 
     window.deleteFood = function(index) {
         const foods = getFoodsFromStorage();
@@ -80,6 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
         e.dataTransfer.setData("text/plain", e.target.innerHTML);
     }
 
+    const hours = document.querySelectorAll(".hour");
     hours.forEach(hour => {
         hour.addEventListener("dragover", dragOver);
         hour.addEventListener("drop", drop);
