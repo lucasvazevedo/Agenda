@@ -3,11 +3,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const foodList = document.getElementById("food-list");
     const foodTitle = document.querySelector(".post-title");
     const foodDescription = document.querySelector(".post-description");
+    const foodType = document.getElementById("foodType");
     const imageInput = document.getElementById("imageInput");
     const editModal = document.getElementById("editModal");
     const editFoodTitle = document.getElementById("edit-food-title");
     const editFoodDescription = document.getElementById("edit-food-description");
     const editImageInput = document.getElementById("edit-image-input");
+    const editFoodType = document.getElementById("edit-food-type");
     const saveChangesButton = document.getElementById("save-changes");
     const closeButton = document.querySelector(".close-button");
     let editingIndex = null;
@@ -21,10 +23,11 @@ document.addEventListener("DOMContentLoaded", () => {
     function registerFood() {
         const title = foodTitle.value.trim();
         const description = foodDescription.value.trim();
+        const type = foodType.value;
         const imageUrl = imageInput.files.length > 0 ? URL.createObjectURL(imageInput.files[0]) : '';
 
-        if (title && description) {
-            const food = { title, description, imageUrl };
+        if (title && description && type) {
+            const food = { title, description, type, imageUrl };
             addFoodToStorage(food);
             loadFoods();
             clearInputs();
@@ -52,6 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <img src="${food.imageUrl}" alt="${food.title}" style="width:100px;height:auto;">
                 <p>${food.title}</p>
                 <p>${food.description}</p>
+                <p>Tipo: ${food.type}</p>
                 <button onclick="editFood(${index})">Editar</button>
                 <button onclick="deleteFood(${index})">Excluir</button>
             `;
@@ -68,6 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function clearInputs() {
         foodTitle.value = '';
         foodDescription.value = '';
+        foodType.value = ''; // Limpa o tipo selecionado
         imageInput.value = '';
     }
 
@@ -77,19 +82,25 @@ document.addEventListener("DOMContentLoaded", () => {
         const food = foods[index];
         editFoodTitle.value = food.title;
         editFoodDescription.value = food.description;
-        editImageInput.value = ''; // Reset the file input
-        editModal.style.display = "block"; // Show the modal
+        editFoodType.value = food.type;
+        editImageInput.value = '';
+        editModal.style.display = "block"; // Mostra o modal
     };
-
+    
+    function closeModal() {
+        editModal.style.display = "none"; // Esconde o modal
+    }
+    
     function saveChanges() {
         const title = editFoodTitle.value.trim();
         const description = editFoodDescription.value.trim();
+        const type = editFoodType.value;
         const imageUrl = editImageInput.files.length > 0 ? URL.createObjectURL(editImageInput.files[0]) : '';
 
-        if (title && description) {
-            const food = { title, description, imageUrl };
+        if (title && description && type) {
+            const food = { title, description, type, imageUrl }; // Inclui o tipo
             const foods = getFoodsFromStorage();
-            foods[editingIndex] = food; // Update the food item
+            foods[editingIndex] = food; 
             localStorage.setItem("foods", JSON.stringify(foods));
             loadFoods();
             closeModal();
@@ -99,7 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function closeModal() {
-        editModal.style.display = "none"; // Hide the modal
+        editModal.style.display = "none"; 
     }
 
     window.deleteFood = function(index) {
@@ -128,4 +139,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const cardHTML = e.dataTransfer.getData("text/plain");
         e.target.innerHTML += cardHTML;
     }
+});
+
+document.getElementById('show-chart').addEventListener('click', function() {
+    window.location.href = './pages/chart.html'; 
 });

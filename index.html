@@ -11,7 +11,10 @@
     <header>
         <h1>Agenda de Tarefas</h1>
         <h2>Organize as atividades da semana</h2>
+        <button id="show-form">Adicionar Modificações</button>
+        <button id="show-chart">Exibir Gráfico</button>
     </header>
+    
     
     <main class="container">
         <div class="form">
@@ -19,25 +22,36 @@
             <input type="text" placeholder="Título do Post" class="post-title">
             <textarea placeholder="Descrição do que comeu..." class="post-description" rows="4"></textarea>
             <input type="file" accept="image/*" class="post-image" id="imageInput">
+            <select class="post-type" id="foodType">
+                <option value="">Selecione o tipo</option>
+                <option value="fruta">Fruta</option>
+                <option value="verdura">Verdura</option>
+                <option value="proteina">Proteína</option>
+                <option value="carboidrato">Carboidrato</option>
+            </select>
             <button class="post-button">Postar</button>
         </div>
+        
+
     
-        <section id="library">
-            <h3>Biblioteca de Atividades</h3>
-            <section id="registered-foods">
-                <h3>Alimentos Registrados</h3>
-                <div id="food-list"></div>
-            </section>
-            <div class="card" draggable="true" data-type="comida">
-                <img src="imagens/prato-comida.jpg" alt="Comida">
-                <p>Hora de Comer</p>
-            </div>
-            <div class="card" draggable="true" data-type="atividade">
-                <img src="imagens/bola.jpg" alt="Atividade">
-                <p>Atividade Física</p>
-            </div>
-            <!-- Outros cards podem ser adicionados aqui -->
-        </section>
+      
+<section id="library">
+    <h3>Biblioteca de Atividades</h3>
+    <section id="registered-foods">
+        <h3>Alimentos Registrados</h3>
+        <div id="food-list"></div>
+    </section>
+    <div class="card" draggable="true" data-type="comida">
+        <img src="imagens/prato-comida.jpg" alt="Comida">
+        <p>Hora de Comer</p>
+    </div>
+    <div class="card" draggable="true" data-type="atividade">
+        <img src="imagens/bola.jpg" alt="Atividade">
+        <p>Atividade Física</p>
+    </div>
+    <!-- Outros cards podem ser adicionados aqui -->
+</section>
+
     </main>
     
 
@@ -165,15 +179,23 @@
 
     <script src="script.js"></script>
 
-    <div id="editModal" class="modal">
+    <div id="editModal" class="modal" style="display:none;">
         <div class="modal-content">
-            <span class="close-button">&times;</span>
             <h3>Editar Alimento</h3>
-            <input type="text" id="edit-food-title" placeholder="Título do Alimento" />
-            <textarea id="edit-food-description" placeholder="Descrição" rows="4"></textarea>
-            <input type="file" id="edit-image-input" accept="image/*" />
+            <input type="text" id="edit-food-title" placeholder="Título do Alimento">
+            <textarea id="edit-food-description" rows="4" placeholder="Descrição do Alimento"></textarea>
+            <input type="file" accept="image/*" id="edit-image-input">
+            <select id="edit-food-type">
+                <option value="">Selecione o tipo</option>
+                <option value="fruta">Fruta</option>
+                <option value="verdura">Verdura</option>
+                <option value="proteina">Proteína</option>
+                <option value="carboidrato">Carboidrato</option>
+            </select>
             <button id="save-changes">Salvar Alterações</button>
+            <button class="close-button">Fechar</button>
         </div>
     </div>
+    
 </body>
 </html>

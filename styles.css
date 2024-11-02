@@ -18,13 +18,6 @@ h1, h2, h3 {
     padding-bottom: 10px;
 }
 
-#library {
-    padding: 20px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    margin: 20px;
-}
 
 .card {
     width: 100px;
@@ -76,18 +69,25 @@ h1, h2, h3 {
 .container {
     display: flex;
     justify-content: space-between;
-    align-items: stretch; /* Para que ambos os cards tenham a mesma altura */
+    align-items: stretch;
     padding: 20px;
 }
 
 
 .form, #library {
-    width: 48%; /* Ajuste a largura conforme necessário */
+    width: 48%;
     background: #FFFFFF;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
     border-radius: 8px;
     padding: 20px;
-    margin: 10px; /* Margem para espaçamento entre os cards */
+    margin: 10px;
+    height: 400px; /* Altura fixa para ambos */
+    overflow-y: auto; /* Permite rolagem se o conteúdo exceder a altura */
+}
+
+#registered-foods {
+    max-height: 300px; /* Altura máxima para a lista de alimentos registrados */
+    overflow-y: auto; /* Permite rolagem apenas nesta seção, se necessário */
 }
 
 .preview-image {
@@ -158,13 +158,13 @@ h1, h2, h3 {
 .modal {
     display: none;
     position: fixed;
-    z-index: 1;
+    z-index: 1000; /* Certifique-se de que seja maior que outros elementos */
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.4); /* Fundo semi-transparente */
 }
 
 .modal-content {
