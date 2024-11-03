@@ -17,7 +17,27 @@ document.addEventListener("DOMContentLoaded", () => {
     postButton.addEventListener("click", registerFood);
     saveFoodButton.addEventListener("click", saveEditedFood);
 
-    loadFoods();
+    const dbName = "FoodDatabase";
+    const dbVersion = 1;
+    let db;
+
+    const predefinedFoods = [
+        { id: 1, title: "Maçã", description: "Uma fruta saudável.", type: "Fruta", imageUrl: "/assets/images/maca.png" },
+        { id: 2, title: "Banana", description: "Uma fruta rica em potássio.", type: "Fruta", imageUrl: "/assets/images/banana.jpg" },
+        { id: 3, title: "Alface", description: "Vegetal de folha verde.", type: "Vegetal", imageUrl: "/assets/images/alface.jpg" },
+        { id: 4, title: "Frango Grelhado", description: "Uma opção saudável de proteína.", type: "Carne", imageUrl: "/assets/images/frango.jpg" }
+    ];
+
+    const request = indexedDB.open(dbName, dbVersion);
+    request.onupgradeneeded = (event) => {
+        db = event.target.result;
+        db.createObjectStore("foods", { keyPath: "id", autoIncrement: true });
+    };
+
+    request.onsuccess = (event) => {
+        db = event.target.result;
+        loadFoods();
+    };
 
     function registerFood() {
         const title = foodTitle.value.trim();
@@ -42,125 +62,179 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function addFoodToStorage(food) {
-        const foods = getFoodsFromStorage();
-        foods.push(food);
-        localStorage.setItem("foods", JSON.stringify(foods));
+        const transaction = db.transaction(["foods"], "readwrite");
+        const objectStore = transaction.objectStore("foods");
+        objectStore.add(food);
     }
 
     function loadFoods() {
         foodList.innerHTML = '';
-        const foods = getFoodsFromStorage();
-        foods.forEach((food, index) => {
-            const foodItem = document.createElement("div");
-            foodItem.className = "card";
-            foodItem.setAttribute("draggable", "true");
-            foodItem.setAttribute("data-index", index);
-            foodItem.innerHTML = `
-                <img src="${food.imageUrl}" alt="${food.title}" style="width:100px;height:auto;">
-                <p>${food.title}</p>
-                <p>${food.description}</p>
-                <p>Tipo: ${food.type}</p>
-                <button onclick="openEditModal(${index})" class="btn-edit">Editar</button>
-                <button onclick="deleteFood(${index})" class="btn-delete">Excluir</button>
-            `;
-            foodItem.addEventListener("dragstart", dragStart);
-            foodList.appendChild(foodItem);
-        });
+        const transaction = db.transaction(["foods"], "readonly");
+        const objectStore = transaction.objectStore("foods");
 
-        updateChart();
+        objectStore.getAll().onsuccess = (event) => {
+            const foods = event.target.result;
+            foods.forEach((food) => {
+                const foodItem = document.createElement("div");
+                foodItem.className = "card";
+                foodItem.setAttribute("draggable", "true");
+                foodItem.setAttribute("data-id", food.id);
+                foodItem.innerHTML = `
+                    <img src="${food.imageUrl}" alt="${food.title}" style="width:100px;height:auto;">
+                    <p>${food.title}</p>
+                    <p>${food.description}</p>
+                    <p>Tipo: ${food.type}</p>
+                    <button onclick="openEditModal(${food.id})" class="btn-edit">Editar</button>
+                    <button onclick="deleteFood(${food.id})" class="btn-delete">Excluir</button>
+                `;
+                foodItem.addEventListener("dragstart", dragStart);
+                foodItem.addEventListener("dragend", dragEnd);
+                foodList.appendChild(foodItem);
+            });
+            updateChart();
+        };
 
         const dropzones = document.querySelectorAll(".dropzone");
         dropzones.forEach(zone => {
             zone.addEventListener("dragover", dragOver);
             zone.addEventListener("drop", dropFood);
-            zone.addEventListener("click", (e) => openSelectFoodModal(e.target));
+            zone.addEventListener("click", () => openSelectFoodModal(zone));
         });
     }
 
     function updateChart() {
-        const foods = getFoodsFromStorage();
-        const foodTypes = {};
-        
-        foods.forEach(food => {
-            foodTypes[food.type] = (foodTypes[food.type] || 0) + 1;
-        });
+        const transaction = db.transaction(["foods"], "readonly");
+        const objectStore = transaction.objectStore("foods");
 
-        const labels = Object.keys(foodTypes);
-        const data = Object.values(foodTypes);
+        objectStore.getAll().onsuccess = (event) => {
+            const foods = event.target.result;
+            const foodTypes = {};
+            
+            foods.forEach(food => {
+                foodTypes[food.type] = (foodTypes[food.type] || 0) + 1;
+            });
 
-        const ctx = document.getElementById('consumption-chart').getContext('2d');
+            const labels = Object.keys(foodTypes);
+            const data = Object.values(foodTypes);
 
-        if (window.consumptionChart) {
-            window.consumptionChart.destroy();
-        }
+            const ctx = document.getElementById('consumption-chart').getContext('2d');
 
-        window.consumptionChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Quantidade de Alimentos por Tipo',
-                    data: data,
-                    backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)'],
-                    borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)'],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
+            if (window.consumptionChart) {
+                window.consumptionChart.destroy();
+            }
+
+            window.consumptionChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Quantidade de Alimentos por Tipo',
+                        data: data,
+                        backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)'],
+                        borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
                     }
                 }
-            }
-        });
+            });
+        };
     }
 
     function dragStart(e) {
-        const index = e.target.getAttribute("data-index");
-        const foods = getFoodsFromStorage();
-        const food = foods[index];
-        
-        const dragImage = document.createElement("div");
-        dragImage.style.position = "absolute";
-        dragImage.style.pointerEvents = "none";
-        dragImage.style.opacity = "0.5";
-        dragImage.innerHTML = `
-            <img src="${food.imageUrl}" alt="${food.title}" style="width:50px;height:auto;">
-            <p>${food.title}</p>
-        `;
-        document.body.appendChild(dragImage);
-        
-        e.dataTransfer.setDragImage(dragImage, 0, 0);
-        e.dataTransfer.setData("text/plain", index);
-        
-        setTimeout(() => {
-            document.body.removeChild(dragImage);
-        }, 0);
+        const id = e.target.getAttribute("data-id");
+        e.dataTransfer.setData("text/plain", id);
+    }
+
+    function dragEnd(e) {
+        e.target.classList.remove("dragging");
     }
 
     function dragOver(e) {
         e.preventDefault();
+        e.dataTransfer.dropEffect = "move";
     }
 
     function dropFood(e) {
         e.preventDefault();
-        const index = e.dataTransfer.getData("text/plain");
-        const foods = getFoodsFromStorage();
-        const food = foods[index];
-    
-        const foodContainer = document.createElement("div");
-        foodContainer.innerHTML = `
-            <img src="${food.imageUrl}" alt="${food.title}" style="width:50px;height:auto;">
-            <p>${food.title}</p>
-        `;
-        e.target.innerHTML = ''; 
-        e.target.appendChild(foodContainer); 
+        const id = e.dataTransfer.getData("text/plain");
+        const transaction = db.transaction(["foods"], "readonly");
+        const objectStore = transaction.objectStore("foods");
+        const request = objectStore.get(Number(id));
+
+        request.onsuccess = (event) => {
+            const food = event.target.result;
+            if (food) {
+                const foodContainer = document.createElement("div");
+                foodContainer.innerHTML = `
+                    <img src="${food.imageUrl}" alt="${food.title}" style="width:50px;height:auto;">
+                    <p>${food.title}</p>
+                `;
+                e.target.innerHTML = '';
+                e.target.appendChild(foodContainer);
+            }
+        };
     }
-    
-    function getFoodsFromStorage() {
-        return JSON.parse(localStorage.getItem("foods")) || [];
+
+    window.deleteFood = function(id) {
+        const transaction = db.transaction(["foods"], "readwrite");
+        const objectStore = transaction.objectStore("foods");
+        objectStore.delete(id);
+        transaction.oncomplete = () => {
+            loadFoods();
+        };
+    };
+
+    window.openEditModal = function(id) {
+        const transaction = db.transaction(["foods"], "readonly");
+        const objectStore = transaction.objectStore("foods");
+        const request = objectStore.get(id);
+
+        request.onsuccess = (event) => {
+            const food = event.target.result;
+            if (food) {
+                editFoodTitle.value = food.title;
+                editFoodDescription.value = food.description;
+                editFoodType.value = food.type;
+                editFoodModal.style.display = "block";
+                editFoodModal.setAttribute("data-id", id);
+            }
+        };
+    };
+
+    function saveEditedFood() {
+        const id = parseInt(editFoodModal.getAttribute("data-id"));
+        const title = editFoodTitle.value.trim();
+        const description = editFoodDescription.value.trim();
+        const type = editFoodType.value;
+
+        const transaction = db.transaction(["foods"], "readwrite");
+        const objectStore = transaction.objectStore("foods");
+        const request = objectStore.get(id);
+
+        request.onsuccess = (event) => {
+            const food = event.target.result;
+            if (food) {
+                food.title = title;
+                food.description = description;
+                food.type = type;
+
+                objectStore.put(food).onsuccess = () => {
+                    loadFoods();
+                    closeModal();
+                };
+            }
+        };
     }
+
+    window.closeModal = function() {
+        editFoodModal.style.display = "none";
+    };
 
     function clearInputs() {
         foodTitle.value = '';
@@ -169,110 +243,30 @@ document.addEventListener("DOMContentLoaded", () => {
         imageInput.value = '';
     }
 
-    window.deleteFood = function(index) {
-        const foods = getFoodsFromStorage();
-        foods.splice(index, 1);
-        localStorage.setItem("foods", JSON.stringify(foods));
-        loadFoods();
-    }
-
-    window.openEditModal = function(index) {
-        const foods = getFoodsFromStorage();
-        const food = foods[index];
-        editFoodTitle.value = food.title;
-        editFoodDescription.value = food.description;
-        editFoodType.value = food.type;
-        editFoodModal.style.display = "block";
-        editFoodModal.setAttribute("data-index", index);
-    }
-
-    function saveEditedFood() {
-        const index = editFoodModal.getAttribute("data-index");
-        const title = editFoodTitle.value.trim();
-        const description = editFoodDescription.value.trim();
-        const type = editFoodType.value;
-
-        const foods = getFoodsFromStorage();
-        foods[index] = { title, description, type, imageUrl: foods[index].imageUrl };
-        localStorage.setItem("foods", JSON.stringify(foods));
-        loadFoods();
-        closeModal();
-    }
-
-    window.closeModal = function() {
-        editFoodModal.style.display = "none";
-    }
-
-    function openSelectFoodModal(target) {
-        foodSelection.innerHTML = '';
-        const foods = getFoodsFromStorage();
-
-        foods.forEach((food, index) => {
-            const checkbox = document.createElement("input");
-            checkbox.type = "checkbox";
-            checkbox.id = `food-${index}`;
-            checkbox.value = index;
-
-            const label = document.createElement("label");
-            label.htmlFor = `food-${index}`;
-            label.textContent = food.title;
-
-            foodSelection.appendChild(checkbox);
-            foodSelection.appendChild(label);
-            foodSelection.appendChild(document.createElement("br"));
-        });
-
-        selectFoodModal.style.display = "block";
-
-        confirmSelectionButton.onclick = () => confirmFoodSelection(target);
-    }
-
-    function confirmFoodSelection(target) {
-        const selectedFoods = [];
-        const checkboxes = foodSelection.querySelectorAll("input[type='checkbox']:checked");
-        checkboxes.forEach(checkbox => {
-            const foodIndex = checkbox.value;
-            const foods = getFoodsFromStorage();
-            selectedFoods.push(foods[foodIndex]);
-        });
-
-        target.innerHTML = ''; 
-        selectedFoods.forEach(food => {
-            const foodContainer = document.createElement("div");
-            foodContainer.innerHTML = `
+    function openSelectFoodModal(zone) {
+        foodSelection.innerHTML = ''; // Limpa a seleção anterior
+        predefinedFoods.forEach(food => {
+            const foodOption = document.createElement("div");
+            foodOption.className = "food-option";
+            foodOption.innerHTML = `
                 <img src="${food.imageUrl}" alt="${food.title}" style="width:50px;height:auto;">
                 <p>${food.title}</p>
+                <button class="select-food-button" data-id="${food.id}">Selecionar</button>
             `;
-            target.appendChild(foodContainer);
+            foodOption.querySelector(".select-food-button").addEventListener("click", () => selectFood(food, zone));
+            foodSelection.appendChild(foodOption);
         });
-
-        closeSelectFoodModal();
+        selectFoodModal.style.display = "block";
     }
 
-    
-});
-
-
-const openModalBtn = document.getElementById('openModalBtn');
-const closeModalBtn = document.getElementById('closeModalBtn');
-const modal = document.getElementById('myModal');
-
-openModalBtn.addEventListener('click', function(event) {
-    event.preventDefault();
-    modal.style.display = 'flex';
-});
-
-closeModalBtn.addEventListener('click', function() {
-    modal.style.display = 'none';
-});
-
-window.addEventListener('click', function(event) {
-    if (event.target === modal) {
-        modal.style.display = 'none';
+    function selectFood(food, zone) {
+        const foodContainer = document.createElement("div");
+        foodContainer.innerHTML = `
+            <img src="${food.imageUrl}" alt="${food.title}" style="width:50px;height:auto;">
+            <p>${food.title}</p>
+        `;
+        zone.innerHTML = '';
+        zone.appendChild(foodContainer);
+        selectFoodModal.style.display = "none";
     }
 });
-
-
-function closeSelectFoodModal() {
-    selectFoodModal.style.display = "none";
-}
