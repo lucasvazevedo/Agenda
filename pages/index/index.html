@@ -242,15 +242,19 @@
 
 
 
-<div id="selectFoodModal" class="modal" style="display:none;">
-    <div class="modal-content">
-        <span class="close-button" onclick="closeSelectFoodModal()">&times;</span>
-        <h3>Selecionar Alimentos</h3>
-        <div id="food-selection"></div>
-        <button id="confirm-selection" class="post-button">Confirmar Seleção</button>
+    <div id="selectFoodModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeSelectFoodModal()">&times;</span>
+            <h3>Selecionar Alimentos</h3>
+            
+            <div id="food-selection">
+                <!-- Os elementos food-option serão gerados dinamicamente pelo JavaScript -->
+            </div>
+    
+            <button id="confirm-selection" class="post-button">Confirmar Seleção</button>
+        </div>
     </div>
-</div>
-
+    
 
 <script src="script.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

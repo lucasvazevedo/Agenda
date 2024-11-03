@@ -243,6 +243,82 @@
     width: 80%; 
 }
 
+#food-selection {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.food-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  width: 150px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+  margin-bottom: 30px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.select-food-checkbox {
+  display: none; /* Esconde o checkbox padrão */
+}
+
+.custom-checkbox {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #f9ba60;
+  border-radius: 3px;
+  margin-right: 8px;
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+
+.select-food-checkbox:checked + .custom-checkbox {
+  background-color: #f9ba60;
+}
+
+.select-food-checkbox:checked + .custom-checkbox::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 5px;
+  width: 4px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+
+.food-option:hover {
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.food-option img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.food-option p {
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+
 .close-button {
     color: #aaa;
     float: right;
