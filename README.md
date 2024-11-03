@@ -17,6 +17,9 @@ A agenda deverá conter o horário da rotina da criança, ex: 7h da manhã até 
 - É necessária a criação de um campo de edição e criação de cards <strong>(Camila)</strong> ✅
 - Ter dois tipos de tela, um para adicionar as modificações e outro com um gráfico exibindo a constância dos alimentos mais consumidos  <strong>(Camila)</strong> ✅
 
+## Em andamento
+A aplicação será apenas uma agenda, cada horário cando clicado abrirá um modal com a opção de alimentos para serem selecionados com checkbox. s  <strong>(Camila)</strong>
+
 
 ## O que ainda precisa ser feito
 - Quando se tratar de card de comida, exibir uma lista de alimentos e cada alimento terá um checkbox para que seja marcado (a finalidade do checkbos é para sinalizar qual alimento a criança come)
