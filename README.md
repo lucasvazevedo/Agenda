@@ -18,7 +18,7 @@ A agenda deverá conter o horário da rotina da criança, ex: 7h da manhã até 
 - Ter dois tipos de tela, um para adicionar as modificações e outro com um gráfico exibindo a constância dos alimentos mais consumidos  <strong>(Camila)</strong> ✅
 
 ## Em andamento
-A aplicação será apenas uma agenda, cada horário cando clicado abrirá um modal com a opção de alimentos para serem selecionados com checkbox. s  <strong>(Camila)</strong>
+Cada horário quando clicado abrirá um modal com a opção de alimentos para serem selecionados com checkbox.   <strong>(Camila)</strong>
 
 
 ## O que ainda precisa ser feito
