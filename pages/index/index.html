@@ -1,174 +1,274 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agenda de Tarefas - Crianças com Autismo</title>
+    <title>Agenda de Cotidiano</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/css/lightgallery.min.css">
+    <link rel="stylesheet" href="./styles/layout.css">
     <link rel="stylesheet" href="styles.css">
-    <link rel="shortcut icon" href="../../assets/favicon.ico" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles/header.css">
+    <link rel="stylesheet" href="./styles/header.css">
+    <link rel="stylesheet" href="./styles/agenda.css">
+    <link rel="stylesheet" href="./styles/importancia.css">
+
 
 </head>
 <body>
-    <header>
-        <div class="header-content">
-            <div class="title">
-                <h1>Agenda de Tarefas</h1>
-                <p>Organize as atividades da semana</p>
-            </div>
-            <div class="buttons">
-                <button id="show-form">Adicionar Modificações</button>
-                <button id="show-chart">Exibir Gráfico</button>
-            </div>
-        </div>
+
+    <!-- seção  header -->
+
+    <header class="header">
+        <a href="#" class="logo"> <i class="fas fa-carrot"></i> Agenda de Cotidiano
+        </a>
+        <nav class="navbar">
+            <a href="#home">início</a>
+            <a href="#about">sobre </a>
+            <a href="#education">importância</a>
+            <a href="#teacher">agenda</a>
+            <a href="#gallery">constância dos alimentos</a>
+        </nav>
     </header>
 
-    <main class="container">
-        <div class="form">
-            <h3>Registrar Alimento</h3>
-            <input type="text" placeholder="Nome do Alimento" class="post-title">
-            <textarea placeholder="Descrição do que comeu..." class="post-description" rows="4"></textarea>
-            <input type="file" accept="image/*" class="post-image" id="imageInput">
-            <select class="post-type" id="foodType">
-                <option value="">Selecione o tipo</option>
-                <option value="fruta">Fruta</option>
-                <option value="verdura">Verdura</option>
-                <option value="proteina">Proteína</option>
-                <option value="carboidrato">Carboidrato</option>
-            </select>
-            <button class="post-button">Postar</button>
+    <!-- seção  header -->
+
+
+    <section class="home" id="home">
+
+        <div class="content">
+            <h3>Agenda de Cotidiano <span> Crianças com Autismo</span></h3>
+            <p>Uma agenda interativa desenvolvida para apoiar crianças com autismo na estruturação de suas rotinas semanais, com foco na alimentação saudável e nas refeições do dia. </p>
+            <a href="#" class="btn" id="openModalBtn">saiba mais</a>
+
+            <div class="modal-about" id="myModal">
+                <div class="modal-content-about">
+                    <span class="close-button-modal" id="closeModalBtn">&times;</span>
+                    <h3>Sobre o Projeto de Extensão</h3>
+                    <p>Este projeto é fruto de uma colaboração entre os cursos de Análise e Desenvolvimento de Sistemas e Sistemas de Informação do Centro Universitário FEPI, voltado a desenvolver uma solução digital inovadora para auxiliar crianças com autismo na organização de suas rotinas diárias. Ao entender as especificidades e os desafios enfrentados por essas crianças e suas famílias, o projeto busca criar uma ferramenta inclusiva e adaptável, promovendo tanto o bem-estar físico quanto o emocional.</p>
+                    <p>A ferramenta, uma agenda interativa, permite que pais e cuidadores registrem e acompanhem os hábitos alimentares das crianças, com foco em incentivar escolhas alimentares mais saudáveis e personalizadas para as necessidades de cada uma. O sistema oferece insights detalhados sobre a frequência de consumo, variedade de alimentos, e até as preferências alimentares, possibilitando um acompanhamento contínuo e ajustado ao desenvolvimento da criança.</p>
+                    <p>Por meio dessa plataforma, o projeto tem como objetivo não apenas promover uma alimentação mais balanceada, mas também fomentar uma rotina que fortaleça a autonomia e o bem-estar das crianças, apoiando seu desenvolvimento de forma integral. Acreditamos que essa iniciativa pode gerar um impacto positivo tanto na qualidade de vida das crianças quanto no cotidiano das famílias, oferecendo uma ferramenta prática e acessível que atende às necessidades específicas de cada usuário.</p>
+                </div>
+            </div>
         </div>
 
-        <section id="library">
-            <h3>Biblioteca de Atividades</h3>
-            <p>Arraste o alimento na agenda ou selecione para enviar o alimento desejado:</p>
-            <div id="registered-foods">
-                <h3>Alimentos Registrados</h3>
-                <div id="food-list" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
-                <button id="show-example-foods-modal">Alimentos já registrados</button>
-            </div>
-            <button id="send-to-calendar">Enviar para o Calendário</button>
+        <div class="image">
+            <img src="/assets/images/home.png" alt="">
+        </div>
 
-            <div>
-                <label for="day-select">Escolha um dia:</label>
-                <select id="day-select">
-                    <option value="domingo">Domingo</option>
-                    <option value="segunda">Segunda</option>
-                    <option value="terca">Terça</option>
-                    <option value="quarta">Quarta</option>
-                    <option value="quinta">Quinta</option>
-                    <option value="sexta">Sexta</option>
-                    <option value="sabado">Sábado</option>
-                </select>
-                <label for="time-select">Escolha um horário:</label>
-                <select id="time-select">
-                    <option value="06:00">06:00</option>
-                    <option value="07:00">07:00</option>
-                    <option value="08:00">08:00</option>
-                    <option value="09:00">09:00</option>
-                    <option value="10:00">10:00</option>
-                    <option value="11:00">11:00</option>
-                    <option value="12:00">12:00</option>
-                    <option value="13:00">13:00</option>
-                    <option value="14:00">14:00</option>
-                    <option value="15:00">15:00</option>
-                    <option value="16:00">16:00</option>
-                    <option value="17:00">17:00</option>
-                    <option value="18:00">18:00</option>
-                </select>
-            </div>
-        </section>
+        <div class="custom-shape-divider-bottom-1684324473">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="shape-fill"></path>
+            </svg>
+        </div>
 
-        <!-- Modal for Example Foods -->
-        <div id="exampleFoodsModal" class="modal" style="display:none;">
-            <div class="modal-content">
-                <h3>Exemplo de Alimentos</h3>
-                <div style="display: flex; flex-wrap: wrap; gap: 20px;">
-                    <div class="food-card" style="border: 1px solid #ccc; border-radius: 10px; padding: 10px; text-align: center; width: 150px;">
-                        <img src="https://via.placeholder.com/100" alt="Exemplo de Alimento 1" style="width: 100px; height: 100px; border-radius: 5px;">
-                        <p>Maçã</p>
-                        <p>Uma fruta saudável.</p>
-                        <input type="checkbox" class="send-checkbox" data-day="domingo" data-time="06:00"> Enviar
+    </section>
+
+    <!-- home section ends -->
+
+
+    <section class="about" id="about">
+
+        <h1 class="heading"> <span>sobre</span> o projeto</h1>
+
+        <div class="row">
+
+            <div class="image">
+                <img src="/assets/images/kids.png" alt="">
+            </div>
+
+            <div class="content">
+                <h3>Projeto de extensão em conjunto</h3>
+                <p>Uma agenda interativa desenvolvida  pelas turmas de Análise e Desenvolvimento de Sistemas e Sistemas de Informação. O projeto tem como objetivo auxiliar crianças com autismo na organização de suas rotinas semanais, com foco na alimentação saudável e na identificação dos alimentos mais consumidos.
+
+                    Através da coleta de dados sobre os hábitos alimentares, buscamos entender a constância dos alimentos preferidos pelas crianças, promovendo não apenas a organização das refeições, mas também contribuindo para uma alimentação mais equilibrada e adaptada às necessidades dos pequenos.
+                    
+                    </p>
+             
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- education section start -->
+
+    <section class="education" id="education">
+
+        <h1 class="heading">importância da <span> agenda</span></h1>
+
+        <div class="box-container">
+
+            <div class="box">
+                <h3>Estruturação da Alimentação</h3>
+                <p>A agenda alimentar ajuda a criar uma rotina de refeições, proporcionando previsibilidade e conforto.
+
+
+                </p>
+                <img src="/assets/images/1.png" alt="">
+            </div>
+
+            <div class="box">
+                <h3> Promoção de Hábitos Saudáveis</h3>
+                <p>Incentiva escolhas alimentares equilibradas, desenvolvendo a consciência sobre a nutrição.
+
+                </p>
+                <img src="/assets/images/education2.png" alt="">
+            </div>
+
+            <div class="box">
+                <h3>Acompanhamento de Preferências</h3>
+                <p>Facilita o registro de alimentos preferidos, ajudando a personalizar a dieta da criança.
+
+
+
+
+
+
+                </p>
+                <img src="/assets/images/education3.png" alt="">
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="teacher" id="teacher">
+        <h1 class="heading">Organize a <span> rotina</span></h1>
+    
+        <div class="box-container">
+            <main class="container">
+                <div class="form">
+                    <h3>Registrar Alimento</h3>
+                    <input type="text" placeholder="Nome do Alimento" class="post-title">
+                    <textarea placeholder="Descrição do que comeu..." class="post-description" rows="4"></textarea>
+                    <input type="file" accept="image/*" class="post-image" id="imageInput">
+                    <select class="post-type" id="foodType">
+                        <option value="">Selecione o tipo</option>
+                        <option value="fruta">Fruta</option>
+                        <option value="vegetal">Vegetal</option>
+                        <option value="proteina">Proteína</option>
+                        <option value="carboidrato">Carboidrato</option>
+                    </select>
+                    <button class="post-button">Postar</button>
+                </div>
+    
+                <section id="library">
+                    <h3>Biblioteca de Atividades</h3>
+                    <p>Arraste o alimento na agenda ou selecione para enviar o alimento desejado:</p>
+                    <div id="registered-foods">
+                        <div id="food-list" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
                     </div>
-                    <div class="food-card" style="border: 1px solid #ccc; border-radius: 10px; padding: 10px; text-align: center; width: 150px;">
-                        <img src="https://via.placeholder.com/100" alt="Exemplo de Alimento 2" style="width: 100px; height: 100px; border-radius: 5px;">
-                        <p>Brócolis</p>
-                        <p>Vegetal nutritivo.</p>
-                        <input type="checkbox" class="send-checkbox" data-day="segunda" data-time="07:00"> Enviar
-                    </div>
-                    <div class="food-card" style="border: 1px solid #ccc; border-radius: 10px; padding: 10px; text-align: center; width: 150px;">
-                        <img src="https://via.placeholder.com/100" alt="Exemplo de Alimento 3" style="width: 100px; height: 100px; border-radius: 5px;">
-                        <p>Frango Grelhado</p>
-                        <p>Fonte de proteína.</p>
-                        <input type="checkbox" class="send-checkbox" data-day="terca" data-time="08:00"> Enviar
+                </section>
+    
+                <!-- Modal para Editar Alimento -->
+                <div id="editFoodModal" class="modal" style="display:none;">
+                    <div class="modal-content">
+                        <span class="close-button" onclick="closeModal()">&times;</span>
+                        <h3>Editar Alimento</h3>
+                        <input type="text" id="edit-food-title" placeholder="Nome do Alimento" class="post-title">
+                        <textarea id="edit-food-description" placeholder="Descrição do que comeu..." class="post-description" rows="4"></textarea>
+                        <select id="edit-food-type" class="post-type">
+                            <option value="fruta">Fruta</option>
+                            <option value="vegetal">Vegetal</option>
+                            <option value="proteina">Proteína</option>
+                            <option value="carboidrato">Carboidrato</option>
+                        </select>
+                        <button id="save-food-button" class="post-button">Salvar</button>
+                   
                     </div>
                 </div>
-                <button class="close-button">Fechar</button>
-            </div>
+                
+            </main>
         </div>
 
-    </main>
-
-    <div class="calendar">
-        <header>
-            <button class="secondary" id="today-button">Hoje</button>
-            <div class="calendar__title">
-                <div class="icon secondary chevron_left" id="prev-day">‹</div>
-                <h1 id="calendar-title"><strong>Hoje</strong></h1>
-                <div class="icon secondary chevron_left" id="next-day">›</div>
-            </div>
-            <div></div>
-        </header>
-        <div class="outer">
-            <div class="wrap">
-                <table>
-                    <thead>
-                        <tr>
-                            <th class="headcol">Hora</th>
-                            <th>Dia da Semana</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td class="headcol">6:00</td><td class="dropzone" data-time="06:00"></td></tr>
-                        <tr><td class="headcol">7:00</td><td class="dropzone" data-time="07:00"></td></tr>
-                        <tr><td class="headcol">8:00</td><td class="dropzone" data-time="08:00"></td></tr>
-                        <tr><td class="headcol">9:00</td><td class="dropzone" data-time="09:00"></td></tr>
-                        <tr><td class="headcol">10:00</td><td class="dropzone" data-time="10:00"></td></tr>
-                        <tr><td class="headcol">11:00</td><td class="dropzone" data-time="11:00"></td></tr>
-                        <tr><td class="headcol">12:00</td><td class="dropzone" data-time="12:00"></td></tr>
-                        <tr><td class="headcol">13:00</td><td class="dropzone" data-time="13:00"></td></tr>
-                        <tr><td class="headcol">14:00</td><td class="dropzone" data-time="14:00"></td></tr>
-                        <tr><td class="headcol">15:00</td><td class="dropzone" data-time="15:00"></td></tr>
-                        <tr><td class="headcol">16:00</td><td class="dropzone" data-time="16:00"></td></tr>
-                        <tr><td class="headcol">17:00</td><td class="dropzone" data-time="17:00"></td></tr>
-                        <tr><td class="headcol">18:00</td><td class="dropzone" data-time="18:00"></td></tr>
-                    </tbody>
-                </table>
+        <div class="calendar">
+            <header>
+                <button class="secondary" id="today-button">Hoje</button>
+                <div class="calendar__title">
+                    <div class="icon secondary chevron_left" id="prev-day">‹</div>
+                    <h1 id="calendar-title"><strong>Hoje</strong></h1>
+                    <div class="icon secondary chevron_left" id="next-day">›</div>
+                </div>
+                <div></div>
+            </header>
+            <div class="outer">
+                <div class="wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="headcol">Hora</th>
+                                <th>Dia da Semana</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="headcol">6:00</td><td class="dropzone" data-time="06:00"></td></tr>
+                            <tr><td class="headcol">7:00</td><td class="dropzone" data-time="07:00"></td></tr>
+                            <tr><td class="headcol">8:00</td><td class="dropzone" data-time="08:00"></td></tr>
+                            <tr><td class="headcol">9:00</td><td class="dropzone" data-time="09:00"></td></tr>
+                            <tr><td class="headcol">10:00</td><td class="dropzone" data-time="10:00"></td></tr>
+                            <tr><td class="headcol">11:00</td><td class="dropzone" data-time="11:00"></td></tr>
+                            <tr><td class="headcol">12:00</td><td class="dropzone" data-time="12:00"></td></tr>
+                            <tr><td class="headcol">13:00</td><td class="dropzone" data-time="13:00"></td></tr>
+                            <tr><td class="headcol">14:00</td><td class="dropzone" data-time="14:00"></td></tr>
+                            <tr><td class="headcol">15:00</td><td class="dropzone" data-time="15:00"></td></tr>
+                            <tr><td class="headcol">16:00</td><td class="dropzone" data-time="16:00"></td></tr>
+                            <tr><td class="headcol">17:00</td><td class="dropzone" data-time="17:00"></td></tr>
+                            <tr><td class="headcol">18:00</td><td class="dropzone" data-time="18:00"></td></tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
+    </section>
+
+
+
+    </section>
+    
+
+    <section class="contact" id="gallery">
+
+     
+        <h1 class="heading"> <span>Gráfico</span> Constância</h1>
+
+        <canvas id="consumption-chart"></canvas>
+
+    
+    </section>
+
+  
+
+    <section class="footer">
+
+        <div class="box-container">
+
+            <div class="box">
+                <h3> <i class="fas fa-carrot"></i>  Agenda de Cotidiano </h3>
+                <p>Turmas ADS e Sistemas</p>
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+    <script src="script.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div id="selectFoodModal" class="modal" style="display:none;">
+    <div class="modal-content">
+        <span class="close-button" onclick="closeSelectFoodModal()">&times;</span>
+        <h3>Selecionar Alimentos</h3>
+        <div id="food-selection"></div>
+        <button id="confirm-selection" class="post-button">Confirmar Seleção</button>
     </div>
+</div>
 
-    <script src="./script.js"></script>
-
-    <div id="editModal" class="modal" style="display:none;">
-        <div class="modal-content">
-            <h3>Editar Alimento</h3>
-            <input type="text" id="edit-food-title" placeholder="Título do Alimento">
-            <textarea id="edit-food-description" rows="4" placeholder="Descrição do Alimento"></textarea>
-            <input type="file" accept="image/*" id="edit-image-input">
-            <select id="edit-food-type">
-                <option value="">Selecione o tipo</option>
-                <option value="fruta">Fruta</option>
-                <option value="verdura">Verdura</option>
-                <option value="proteina">Proteína</option>
-                <option value="carboidrato">Carboidrato</option>
-            </select>
-            <button id="save-changes">Salvar Alterações</button>
-            <button class="close-button">Fechar</button>
-        </div>
-    </div>
 
 </body>
-
-
 </html>

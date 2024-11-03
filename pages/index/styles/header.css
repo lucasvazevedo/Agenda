@@ -1,0 +1,90 @@
+.header{
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 9%;
+    background: var(--white);
+    box-shadow: var(--box-shadow);
+  }
+  
+  textarea{
+    resize: none;
+  }
+  .header .logo{
+    font-size: 2.5rem;
+    font-weight: bolder;
+    color: var(--black);
+  }
+  
+  .header .logo i{
+    color: var(--orange);
+  }
+  
+  .header .navbar a{
+    font-size: 1.7rem;
+    margin: 0 1rem;
+    color: var(--black);
+  }
+  
+  .header .navbar a:hover,
+  .header .icons div:hover{
+    color: var(--orange);
+  }
+  
+  .header .icons div{
+    font-size: 2.5rem;
+    margin-left: 1.7rem;
+    color: var(--black);
+    cursor: pointer;
+  }
+  
+  #menu-btn{
+    display: none;
+  }
+  
+  .header .login-form{
+    position: absolute;
+    top: 110%; right: -110%;
+    width: 35rem;
+    box-shadow: var(--box-shadow);
+    padding: 2rem;
+    border-radius: .5rem;
+    background: var(--white);
+    text-align: center;
+  }
+  
+  .header .login-form.active{
+    right: 2rem;
+    transition: .4s linear;
+  }
+  
+  .header .login-form h3{
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    color: var(--black);
+  }
+  
+  .header .login-form .box{
+    width: 100%;
+    margin: .7rem 0;
+    background: #eee;
+    border-radius: .5rem;
+    padding: 1rem;
+    font-size: 1.6rem;
+    color: var(--black);
+    text-transform: capitalize;
+  }
+  
+  .header .login-form p{
+    font-size: 1.4rem;
+    padding: .5rem 0;
+    color: var(--light-color);
+  }
+  
+  .header .login-form p a{
+    color: var(--orange);
+    text-decoration: underline;
+  }

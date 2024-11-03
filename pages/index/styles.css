@@ -1,370 +1,224 @@
-body {
-    font-family: 'Poppins', 'Inter', sans-serif;
-    background-color: #f5f5f5;
-    margin: 0;
-    padding: 0;
+
+.home{
+  min-height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: center;
+  position: relative;
 }
 
-header {
-    background-color: #4CAF50;
-    color: white;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+.home .content{
+  flex: 1 1 40rem;
+  padding-top: 6.5rem;
 }
 
-.header-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.home .content h3{
+  font-size: 6rem;
+  color: var(--black);
 }
 
-.title h1, .title h2 {
-    margin: 0;
+.home .content h3 span{
+  color: var(--orange);
 }
 
-.buttons button {
-    background-color: white;
-    color: #4CAF50;
-    padding: 10px 15px;
-    font-family: 'Poppins', 'Inter', sans-serif;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-left: 10px;
-    transition: background-color 0.5s ease, color 0.5s ease;
+.home .content p{
+  font-size: 1.7rem;
+  color: var(--light-color);
+  line-height: 1.8;
+  padding: 1rem 0;
 }
 
-.buttons button:hover {
-    background-color: #347b37;
-    color: white;
+.home .image{
+  flex: 1 1 40rem;
 }
 
-
-h1, h2, h3 {
-    margin: 0;
-    padding-bottom: 10px;
+.home .image img{
+  width: 100%;
+  padding: 4rem;
 }
 
-
-/*****************************FORM E BIBLIOTECA DE ATIVIDADES**********************************************************************/
-.container {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    padding: 20px;
-    margin-top: 30px;
+.custom-shape-divider-bottom-1684324473 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
 }
 
-.form {
-    background-color: #ffffff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    width: 48%;
-    height: 400px;
-    box-sizing: border-box;
-    border-radius: 12px;
+.custom-shape-divider-bottom-1684324473 svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 107px;
+  transform: rotateY(180deg);
 }
 
-#library {
-    background-color: #ffffff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    width: 48%;
-    height: 400px;
-    box-sizing: border-box;
-    border-radius: 12px;
-    overflow-y: auto;
-}
-
-.form h3, #library h3 {
-    margin-top: 0;
-    color: #333;
-    font-weight: 600;
-}
-
-.post-title, .post-description, .post-type {
-    width: 100%;
-    margin-bottom: 15px;
-    padding: 4px;
-    resize: none;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #f7f7f7; 
-    font-size: 14px;
-    font-family: 'Poppins', sans-serif;
-    transition: border-color 0.3s ease;
-}
-
-.post-title:focus, .post-description:focus, .post-type:focus {
-    border-color: #4CAF50;
-    outline: none;
-    box-shadow: 0 0 6px rgba(76, 175, 80, 0.2);
-}
-
-.post-button {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 10px;
-    width: 100%;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 600;
-    transition: background-color 0.3s ease;
-}
-
-.post-button:hover {
-    background-color: #45a049;
-}
-
-.card {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 5px; 
-    border-radius: 8px;
-    margin-top: 10px;
-    text-align: center;
-    transition: transform 0.2s ease;
-    width: 150px; 
-    height: auto; 
-    font-size: 12px;
-    font-family: 'Poppins', sans-serif;
-}
-
-.card img {
-    width: 80px;
-    height: auto;
-    
-}
-
-.btn-edit, .btn-delete {
-    padding: 5px 8px; 
-    font-size: 10px;
-    margin: 2px; 
-}
-
-.card:hover {
-    transform: scale(1.02);
-}
-
-#library::-webkit-scrollbar {
-    width: 6px;
-}
-
-#library::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-#library::-webkit-scrollbar-thumb {
-    background-color: #4CAF50;
-    border-radius: 10px;
-}
-
-/***********************************MODAL**********************************/
-
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1000; /* Certifique-se de que seja maior que outros elementos */
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4); /* Fundo semi-transparente */
-}
-
-.modal-content {
-    background-color: #FFFFFF;
-    margin: 10% auto;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-    width: 90%;
-    max-width: 400px;
-    text-align: center;
-}
-
-.close-button {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close-button:hover,
-.close-button:focus {
-    color: #4CAF50;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.modal h3 {
-    margin: 0 0 20px;
-    color: #333;
-    font-weight: 400;
-}
-
-.modal input, .modal textarea {
-    font-family: 'Roboto', sans-serif;
-    outline: 0;
-    background: #f2f2f2;
-    width: 100%;
-    border: 0;
-    margin: 0 0 15px;
-    padding: 15px;
-    font-size: 14px;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-.modal textarea {
-    resize: none;
-    height: 80px;
-}
-
-.modal button {
-    font-family: 'Roboto', sans-serif;
-    outline: 0;
-    background: #4CAF50;
-    width: 100%;
-    border: 0;
-    padding: 15px;
-    color: #FFFFFF;
-    font-size: 14px;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: background 0.3s ease;
-    border-radius: 4px;
-}
-
-.modal button:hover {
-    background: #43A047;
-}
-
-
-/*************************AGENDA***************/
-
-  
-.calendar {
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    margin-top: 30px;
-  }
-  
-  .calendar header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem;
+.custom-shape-divider-bottom-1684324473 .shape-fill {
+  fill: var(--pink);
 }
 
 
 
-.calendar__title {
-    display: flex;
-    align-items: center;
+.about{
+  background: var(--pink);
+}
+
+.about .row{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.about .row .image{
+  flex: 1 1 50rem;
+}
+
+.about .row .image img{
+  width: 100%;
+  height: 100%;
+}
+
+.about .row .content{
+  flex: 1 1 40rem;
+}
+
+.about .row .content h3{
+  font-size: 3.5rem;
+  color: var(--white);
+  line-height: 1.5;
+}
+
+.about .row .content p{
+  font-size: 1.4rem;
+  color: var(--white);
+  padding: 1rem 0;
+  line-height: 2;
 }
 
 
-  .today-button {
-    background: transparent;
-    color: #fff;
-    border: 1px solid #fff;
-    border-radius: 5px;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    transition: background 0.3s, color 0.3s;
-  }
-  
-  .today-button:hover {
-    background: rgba(255, 255, 255, 0.3);
-    color: #00B4FC;
-  }
-  
 
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  thead {
-    background: #f4f4f4;
-  }
-  
-  th, td {
-    padding: 1rem;
-    text-align: center;
-    border: 1px solid #ddd;
-    transition: background 0.2s;
-  }
-  
-  .headcol {
-    width: 60px;
-    background: #f0f4f8;
-  }
-  
-  td:hover {
-    background: #f9f9f9;
-  }
-  
-  .event {
-    background: #ff5733; /* Mudar a cor do evento */
-    color: white;
-    border-radius: 8px; /* Para um visual mais "card" */
-    padding: 10px;
-    margin: 5px; /* Adiciona espaço entre os cards de eventos */
-    width: auto; /* Permitir que o card não ocupe toda a largura */
-    display: inline-block; /* Faz o card se comportar como um bloco em linha */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra para efeito de card */
+/* end */
+
+/* end */
+
+/* footer */
+
+.footer{
+  background: var(--pink);
 }
 
-.event:hover {
-    background: #c0392b; /* Cor de fundo do evento ao passar o mouse */
+.footer .box-container{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25rem,1fr));
+  gap: 1.5rem;
 }
-  
-  .icon {
-    cursor: pointer;
-    font-size: 1.5rem;
-    color: white;
-    margin: 0 10px;
-    transition: color 0.3s;
-  }
-  
-  .icon:hover {
-    color: #dadde0;
+
+.footer .box-container .box h3{
+  font-size: 2.2rem;
+  color: var(--orange);
+  padding: 1rem 0;
+}
+
+.footer .box-container .box p{
+  font-size: 1.5rem;
+  color: var(--white);
+  padding: 1rem 0;
+  line-height: 2;
+}
+
+.footer .box-container .box a{
+  display: block;
+  font-size: 1.4rem;
+  color: var(--white);
+  padding: 1rem 0;
+}
+
+.footer .box-container .box a:hover{
+  color: var(--orange);
+}
+
+.footer .box-container .box a i{
+  padding-right: .5rem;
+  color: var(--orange);
+}
+
+.footer .credit{
+  margin-top: 2.5rem;
+  padding: 1rem;
+  padding-top: 2rem;
+  border-top: .1rem solid rgba(0,0,0,.3);
+  text-align: center;
+  color: var(--white);
+  font-size: 2rem;
+}
+
+.footer .credit span{
+  color: var(--orange);
+}
+
+/* end */
+
+/* media query */
+
+@media (max-width:991px){
+
+  html{
+    font-size: 55%;
   }
 
-  .btn-edit {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
+  .header{
+    padding: 2rem 3rem;
+  }
+
+  section{
+    padding: 3rem;
+  }
+
+}
+
+@media (max-width:768px){
+
+  #menu-btn{
     display: inline-block;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 4px;
+  }
+
+  .header .navbar{
+    position: absolute;
+    top: 110%; right: -110%;
+    width: 30rem;
+    box-shadow: var(--box-shadow);
+    border-radius: .5rem;
+    background: var(--white);
+  }
+
+  .header .navbar.active{
+    right: 2rem;
+    transition: .4s linear;
+  }
+
+  .header .navbar a{
+    font-size: 2rem;
+    margin: 2rem 2.5rem;
+    display: block;
+  }
+
+  .home .content h3{
+    font-size: 4.5rem;
+  }
+
 }
 
-.btn-delete {
-    background-color: red;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 4px;
+@media (max-width:450px){
+  html{
+    font-size: 50%;
+  }
+  .home .content h3{
+    font-size: 3.5rem;
+  }
 }
-
-
 
 
 
@@ -377,15 +231,15 @@ h1, h2, h3 {
     width: 100%; 
     height: 100%; 
     overflow: auto; 
-    background-color: rgb(0,0,0); 
-    background-color: rgba(0,0,0,0.4); 
+    background-color: rgba(0, 0, 0, 0.4); 
 }
 
 .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto; 
+    background-color: #ffffff; /* Fundo branco, igual ao do formulário */
+    margin: 10% auto; 
     padding: 20px;
-    border: 1px solid #888;
+    border-radius: 15px; /* Bordas arredondadas */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Sombra similar ao formulário */
     width: 80%; 
 }
 
@@ -394,4 +248,47 @@ h1, h2, h3 {
     float: right;
     font-size: 28px;
     font-weight: bold;
+    cursor: pointer; /* Adiciona um cursor de ponteiro */
+}
+
+.close-button:hover {
+    color: #f9ba60; /* Altera a cor ao passar o mouse */
+}
+
+
+/*** */
+
+
+
+.modal-about {
+  display: none; 
+  position: fixed; 
+  z-index: 1; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgba(0, 0, 0, 0.4); 
+}
+
+.modal-content-about {
+  background-color: #ffffff; /* Fundo branco, igual ao do formulário */
+  margin: 10% auto; 
+  padding: 20px;
+  border-radius: 15px; /* Bordas arredondadas */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Sombra similar ao formulário */
+  width: 80%; 
+}
+
+.close-button-modal {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer; /* Adiciona um cursor de ponteiro */
+}
+
+.close-button-modal:hover {
+  color: #f9ba60; /* Altera a cor ao passar o mouse */
 }

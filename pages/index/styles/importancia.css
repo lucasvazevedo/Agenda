@@ -1,0 +1,48 @@
+
+.education .box-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .education .box-container .box{
+    background: var(--white);
+    border-radius: 2rem;
+    box-shadow: var(--box-shadow);
+    outline: .1rem solid rgba(0,0,0,.1);
+    outline-offset: -1rem;
+    overflow: hidden;
+  }
+  
+  .education .box-container .box:hover img{
+    transform: scale(1.1);
+  }
+  
+  .education .box-container .box:nth-child(odd){
+    background: var(--pink);
+  }
+  
+  .education .box-container .box:nth-child(2){
+    background: var(--orange);
+  }
+  
+  .education .box-container .box h3{
+    font-size: 2.5rem;
+    color: var(--white);
+    line-height: 1.8;
+    padding-top: 3rem;
+    padding-left: 2rem;
+  }
+  
+  .education .box-container .box p{
+    font-size: 1.5rem;
+    line-height: 1.8;
+    color: var(--white);
+    padding: 1rem 2rem;
+  }
+  
+  .education .box-container .box img{
+    width: 100%;
+    height: 66%;
+  }
+  
