@@ -336,6 +336,7 @@
 
 
 
+
 .modal-about {
   display: none; 
   position: fixed; 
@@ -349,22 +350,23 @@
 }
 
 .modal-content-about {
-  background-color: #ffffff; /* Fundo branco, igual ao do formulário */
+  background-color: #ffffff; 
   margin: 10% auto; 
   padding: 20px;
-  border-radius: 15px; /* Bordas arredondadas */
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Sombra similar ao formulário */
+  border-radius: 15px; 
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
   width: 80%; 
 }
 
 .close-button-modal {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  cursor: pointer; /* Adiciona um cursor de ponteiro */
+  position: absolute;
+  font-size: 24px;
+  cursor: pointer;
+  color: #f9ba60; 
+
 }
 
+
 .close-button-modal:hover {
-  color: #f9ba60; /* Altera a cor ao passar o mouse */
+  color: #f9ba60; 
 }

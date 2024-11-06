@@ -13,9 +13,26 @@ document.addEventListener("DOMContentLoaded", () => {
     const selectFoodModal = document.getElementById("selectFoodModal");
     const foodSelection = document.getElementById("food-selection");
     const confirmSelectionButton = document.getElementById("confirm-selection");
-
+    const openModalBtn = document.getElementById("openModalBtn");
+    const myModal = document.getElementById("myModal");
+    const closeModalBtn = document.getElementById("closeModalBtn");
     postButton.addEventListener("click", registerFood);
     saveFoodButton.addEventListener("click", saveEditedFood);
+
+      openModalBtn.addEventListener("click", () => {
+        myModal.style.display = "block";
+    });
+
+    closeModalBtn.addEventListener("click", () => {
+        myModal.style.display = "none";
+    });
+
+    window.addEventListener("click", (event) => {
+        if (event.target === myModal) {
+            myModal.style.display = "none";
+        }
+    });
+
 
     const dbName = "FoodDatabase";
     const dbVersion = 1;
@@ -234,6 +251,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     window.closeModal = function() {
         editFoodModal.style.display = "none";
+    };
+
+    window.closeSelectFoodModal = function() {
+        selectFoodModal.style.display = "none";
     };
 
     function clearInputs() {
